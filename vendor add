@@ -22,6 +22,7 @@ SELECT
     Ac.GKONT AS Offsetting_Account, 
     BS.KOART AS Offsetting_Account_Type,
     S.SGTXT AS Text, 
+	L.SPERR AS vendor_block,
     S.LIFNR AS Supplier, 
     L.NAME1 AS Vendor_Name, 
     S.WAERS AS Document_Currency_Key,
@@ -32,7 +33,7 @@ SELECT
     S.GJAHR AS Fiscal_Year,
     S.MONAT AS Posting_Period,
     S.ZLSPR AS Payment_Block,
-	
+
     -- MSME Code Condition
     COALESCE(DM.TAXNUMXL, NULL) AS MSME_Code,
 
@@ -113,7 +114,6 @@ on S.bukrs = T1.bukrs
 ---- join for the plant name 
 left join SAPABAP1.t001w as Tw
 ON LEFT(AC.PRCTR, 4) = TW.WERKS
-
 
 	
 WHERE S.HKONT IN (
